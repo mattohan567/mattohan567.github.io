@@ -317,6 +317,43 @@
                 align-items: center;
             }
         }
+
+        /* Add styles for organization links */
+        .org-link {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .org-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .org-link:hover {
+            color: var(--primary-color);
+        }
+
+        .org-link:hover::after {
+            width: 100%;
+        }
+
+        .org-link:hover i {
+            transform: translateX(3px);
+        }
+
+        .experience-card h3 a i {
+            margin-left: 5px;
+            font-size: 0.8em;
+            transition: var(--transition);
+        }
     </style>
 </head>
 <body>
@@ -354,7 +391,7 @@
     <section id="experience" class="section">
         <h2>Experience</h2>
         <div class="experience-card">
-            <h3><i class="fas fa-hospital"></i> Data Scientist, Intern - Qventus</h3>
+            <h3><i class="fas fa-hospital"></i> Data Scientist, Intern - <a href="https://www.qventus.com/" target="_blank" class="org-link">Qventus</a></h3>
             <div class="date">February 2025 - Present</div>
             <ul>
                 <li>Developing machine learning models to predict case response status and optimize healthcare operations using AWS SageMaker</li>
@@ -364,7 +401,7 @@
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-desktop"></i> Data Scientist, Intern - Raydiant</h3>
+            <h3><i class="fas fa-desktop"></i> Data Scientist, Intern - <a href="https://www.raydiant.com/" target="_blank" class="org-link">Raydiant</a></h3>
             <div class="date">October 2024 - February 2025</div>
             <ul>
                 <li>Developed and optimized ETL pipelines using AWS (S3, Glue, Lambda, Athena) to process customer data, reducing processing time by 30% for 3M+ records</li>
@@ -374,7 +411,7 @@
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-dna"></i> Data Scientist, Intern - Axaitech</h3>
+            <h3><i class="fas fa-dna"></i> Data Scientist, Intern - <a href="https://www.axaitech.co.za/" target="_blank" class="org-link">Axaitech</a></h3>
             <div class="date">July 2022 - August 2022</div>
             <ul>
                 <li>Collaborated with team to optimize ML model, reducing gene expression analysis from 58,000 to 16 genes, leading to 75% cost reduction and 60% faster processing</li>
@@ -384,7 +421,7 @@
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-chart-line"></i> Data Scientist, Consultant - DataRes</h3>
+            <h3><i class="fas fa-chart-line"></i> Data Scientist, Consultant - <a href="https://ucladatares.com/" target="_blank" class="org-link">DataRes</a></h3>
             <div class="date">October 2022 - May 2023</div>
             <ul>
                 <li>Built Python Streamlit dashboard to provide real-time feedback on home descriptions, analyzing 10,000+ listings to identify key factors for content improvement, resulting in 30% higher engagement rates</li>
@@ -393,7 +430,7 @@
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-users"></i> Vice President - Club Sampling Club, UCLA</h3>
+            <h3><i class="fas fa-users"></i> Vice President - <a href="https://linktr.ee/clubsamplingclub" target="_blank" class="org-link">Club Sampling Club</a>, UCLA</h3>
             <div class="date">September 2022 - June 2023</div>
             <ul>
                 <li>Led a team to organize and execute events with various campus organizations</li>
@@ -471,30 +508,30 @@
     <section id="education" class="section">
         <h2>Education</h2>
         <div class="experience-card">
-            <h3><i class="fas fa-university"></i> University of San Francisco</h3>
+            <h3><i class="fas fa-university"></i> <a href="https://www.usfca.edu/arts-sciences/programs/graduate/data-science" target="_blank" class="org-link">University of San Francisco</a></h3>
             <div class="date">Master's of Science in Data Science (MSDS) - Expected July 2025</div>
             <p>Coursework: Linear Regression, Relational Databases, Computation in Python, Statistics, Data Structures and Algorithms, Distributed Computing, Machine Learning, Deep Learning, Experimental Design, Distributed Data Systems, Data Engineering</p>
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-university"></i> University of California, Los Angeles (UCLA)</h3>
+            <h3><i class="fas fa-university"></i> <a href="https://datatheory.ucla.edu/" target="_blank" class="org-link">University of California, Los Angeles (UCLA)</a></h3>
             <div class="date">Bachelor of Science in Data Theory - June 2023</div>
             <ul>
                 <li>GPA: 3.7/4.0</li>
                 <li>Dean's Honors List: Fall 2021, Winter 2022, Winter 2023</li>
-                <li>Roles: Data Scientist at UCLA DataRes and Vice President at UCLA's Club Sampling Club</li>
+                <li>Roles: Data Scientist at <a href="https://ucladatares.com/" target="_blank">UCLA DataRes</a> and Vice President at <a href="https://linktr.ee/clubsamplingclub" target="_blank">UCLA's Club Sampling Club</a></li>
                 <li>Coursework: Machine Learning, Math Modeling, Python and Technologies for Data Science, Data Analysis and Regression, Statistical Programming with R, Algorithms, Computation and Optimization, SQL</li>
             </ul>
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-globe-europe"></i> iXperience Data Science Course</h3>
+            <h3><i class="fas fa-globe-europe"></i> <a href="https://www.ixperience.co/" target="_blank" class="org-link">iXperience Data Science Course</a></h3>
             <div class="date">Lisbon, Portugal - August 2022</div>
             <p>6-week educational experience studying and interning in Data Science, focusing on Python programming, data preprocessing and cleaning methods, data analysis and feature engineering, data visualization, and machine learning techniques</p>
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-university"></i> Glendale Community College</h3>
+            <h3><i class="fas fa-university"></i> <a href="https://www.glendale.edu/" target="_blank" class="org-link">Glendale Community College</a></h3>
             <div class="date">Associate for Science in Transfer: Mathematics - June 2021</div>
             <ul>
                 <li>GPA: 3.9/4.0</li>
