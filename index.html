@@ -356,9 +356,9 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <button class="theme-toggle" id="theme-toggle">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
     </button>
 
     <header class="header">
@@ -644,6 +644,9 @@
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const icon = themeToggle.querySelector('i');
+        
+        // Initialize icon to match the default dark theme
+        icon.className = 'fas fa-sun';
         
         themeToggle.addEventListener('click', () => {
             document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
