@@ -44,6 +44,26 @@
             transition: var(--transition);
         }
 
+        /* General link styling for all anchor tags */
+        a {
+            color: #f472b6;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: #ec4899;
+            text-shadow: 0 0 8px rgba(244, 114, 182, 0.5);
+        }
+
+        /* Light theme link colors */
+        [data-theme="light"] a {
+            color: #db2777;
+        }
+
+        [data-theme="light"] a:hover {
+            color: #be185d;
+        }
+
         /* Header Styles */
         .header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
@@ -514,12 +534,14 @@
         </div>
         
         <div class="experience-card">
-            <h3><i class="fas fa-robot"></i> AI-Powered Weight Loss Tracking Application</h3>
+            <h3><i class="fas fa-heartbeat"></i> GLP-1 Coach - Production iOS Health AI Application</h3>
+            <div class="date">Production Deployment</div>
             <ul>
-                <li>Developed full-stack web application using FastAPI (Python) and React, integrating OpenAI GPT-4 Vision for automated food recognition and nutrition analysis from images</li>
-                <li>Implemented conversational AI chatbot with 95%+ intent detection accuracy for natural language meal, exercise, and weight logging using GPT-3.5/GPT-4</li>
-                <li>Designed PostgreSQL database schema with 8 normalized tables, SQLAlchemy ORM, and Alembic migrations; built comprehensive REST API with async/await patterns</li>
-                <li>Created interactive data visualization dashboard using Plotly with weight trend projections, calorie tracking, and macronutrient analysis across customizable time periods</li>
+                <li>Deployed production FastAPI backend on Fly.io with Docker containerization, serving real-time health tracking for nutrition, exercise, weight, and medication management</li>
+                <li>Built PostgreSQL database with Supabase for authentication, storage, and real-time data sync across iOS app</li>
+                <li>Integrated Claude AI (Haiku/Sonnet) with optimized model selection for tailored coaching, cutting AI costs by 60% while preserving quality</li>
+                <li>Implemented production observability using Langfuse for AI tracing and cost tracking, and Sentry for error and performance monitoring</li>
+                <li>Developed iOS app in SwiftUI with multi-modal nutrition tracking (text/image parsing), AI-powered coaching, and analytics dashboards</li>
             </ul>
         </div>
         
@@ -634,13 +656,25 @@
         <h2>Skills</h2>
         <div class="skills-grid">
             <div class="skill-category">
-                <h3><i class="fas fa-cloud"></i> Cloud & Infrastructure</h3>
+                <h3><i class="fas fa-robot"></i> Generative AI / LLM Tools</h3>
                 <ul>
-                    <li>AWS (EC2, Lambda, S3, Glue, Redshift, Athena, SageMaker, ECS, ECR)</li>
-                    <li>Google Cloud Platform (GCP, GCR, BigQuery)</li>
-                    <li>Docker, Kubernetes</li>
-                    <li>Snowflake</li>
-                    <li>Postgres, MongoDB</li>
+                    <li>Claude API (Haiku, Sonnet, Opus)</li>
+                    <li>GPT-4/3.5, GPT-4 Vision</li>
+                    <li>CrewAI, Multi-Agent Systems</li>
+                    <li>LMNT TTS</li>
+                    <li>Langfuse (AI Tracing & Cost Tracking)</li>
+                    <li>Prompt Engineering</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-cloud"></i> MLOps & Cloud Infrastructure</h3>
+                <ul>
+                    <li>AWS (SageMaker, Glue, Lambda, S3, EC2, Redshift, Athena, ECS, ECR)</li>
+                    <li>Docker, Kubernetes, CI/CD</li>
+                    <li>Supabase (Auth, Storage, PostgreSQL)</li>
+                    <li>MLflow, Sentry</li>
+                    <li>Snowflake, BigQuery</li>
+                    <li>Google Cloud Platform (GCP, GCR)</li>
                 </ul>
             </div>
             <div class="skill-category">
@@ -654,24 +688,24 @@
             <div class="skill-category">
                 <h3><i class="fas fa-brain"></i> ML & AI</h3>
                 <ul>
+                    <li>PyTorch, TensorFlow, Scikit-Learn</li>
                     <li>Deep Learning, NLP, Computer Vision</li>
-                    <li>LLMs, Feature Engineering</li>
+                    <li>Ensemble Methods (XGBoost, LightGBM, CatBoost)</li>
+                    <li>Feature Engineering, SHAP</li>
                     <li>Predictive Modeling, A/B Testing</li>
                     <li>Time Series Analysis</li>
-                    <li>Ensemble Methods (XGBoost, LightGBM, CatBoost)</li>
                     <li>Neural Networks</li>
-                    <li>MLFlow, SHAP</li>
                 </ul>
             </div>
             <div class="skill-category">
                 <h3><i class="fas fa-database"></i> Data Engineering</h3>
                 <ul>
-                    <li>ETL/ELT Pipelines</li>
+                    <li>FastAPI, Flask, REST APIs</li>
+                    <li>PostgreSQL, MongoDB, Redis</li>
+                    <li>ETL/ELT Pipelines, Celery</li>
                     <li>Data Warehousing, Data Modeling</li>
-                    <li>Data Quality</li>
-                    <li>CI/CD</li>
-                    <li>Real-time Inference</li>
-                    <li>Model Monitoring</li>
+                    <li>Real-time Inference, Model Monitoring</li>
+                    <li>Data Quality, SQLAlchemy, Alembic</li>
                 </ul>
             </div>
             <div class="skill-category">
