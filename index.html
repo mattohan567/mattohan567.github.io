@@ -14,26 +14,35 @@
         }
 
         :root {
-            --primary-color: #064e3b;
-            --secondary-color: #10b981;
-            --accent-color: #ec4899;
-            --gold-color: #fbbf24;
-            --text-color: #1f2937;
-            --bg-color: #f0fdf4;
-            --card-bg: #ffffff;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --transition: all 0.3s ease;
+            /* Data Viz Color Palette - Refined */
+            --neural-primary: #00d4ff;      /* Electric cyan - main accent */
+            --neural-secondary: #7c3aed;    /* Violet - secondary */
+            --neural-accent: #22c55e;       /* Muted green - softer than neon */
+            --neural-glow: #0ea5e9;         /* Sky blue - glow effects */
+            --neural-dark: #0a0a1a;         /* Deep space black */
+            --neural-pulse: #f472b6;        /* Pink - pulse animations */
+
+            /* Mapped to existing variables for compatibility */
+            --primary-color: #00d4ff;
+            --secondary-color: #7c3aed;
+            --accent-color: #22c55e;
+            --gold-color: #00d4ff;
+            --text-color: #e2e8f0;
+            --bg-color: #0a0a1a;
+            --card-bg: rgba(15, 15, 35, 0.8);
+            --card-shadow: 0 4px 20px rgba(0, 212, 255, 0.1), 0 0 40px rgba(124, 58, 237, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        [data-theme="dark"] {
-            --primary-color: #10b981;
-            --secondary-color: #34d399;
-            --accent-color: #f472b6;
-            --gold-color: #fbbf24;
-            --text-color: #f0fdf4;
-            --bg-color: #022c22;
-            --card-bg: #064e3b;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        [data-theme="light"] {
+            --primary-color: #0891b2;
+            --secondary-color: #6d28d9;
+            --accent-color: #059669;
+            --gold-color: #0891b2;
+            --text-color: #1e293b;
+            --bg-color: #f0f9ff;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
         }
 
         body {
@@ -46,49 +55,66 @@
 
         /* General link styling for all anchor tags */
         a {
-            color: #f472b6;
+            color: var(--neural-primary);
             transition: var(--transition);
         }
 
         a:hover {
-            color: #ec4899;
-            text-shadow: 0 0 8px rgba(244, 114, 182, 0.5);
+            color: var(--neural-accent);
+            text-shadow: 0 0 6px rgba(0, 212, 255, 0.3);
         }
 
         /* Light theme link colors */
         [data-theme="light"] a {
-            color: #db2777;
+            color: #0891b2;
         }
 
         [data-theme="light"] a:hover {
-            color: #be185d;
+            color: #059669;
+            text-shadow: none;
         }
 
         /* Header Styles */
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background: var(--neural-dark);
             color: white;
-            padding: 6rem 2rem;
+            padding: 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .header::before {
-            content: '';
+        #neural-canvas {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            opacity: 0.1;
-            animation: backgroundMove 20s linear infinite;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
-        @keyframes backgroundMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 26, 0.01);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
         }
 
         @keyframes shimmer {
@@ -96,15 +122,35 @@
             100% { background-position: 200% center; }
         }
 
-        @keyframes goldGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(251, 191, 36, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.6), 0 0 30px rgba(251, 191, 36, 0.3); }
+        @keyframes neuralGlow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+                text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(124, 58, 237, 0.3);
+                text-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 255, 136, 0.3);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
         }
 
         .header h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease;
+            background: linear-gradient(90deg, var(--neural-primary), var(--neural-secondary), var(--neural-accent));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1:hover {
+            animation: fadeInUp 1s ease, shimmer 3s linear infinite;
         }
 
         .header p {
@@ -112,6 +158,7 @@
             opacity: 0.9;
             animation: fadeInUp 1s ease 0.2s;
             animation-fill-mode: both;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         @keyframes fadeInUp {
@@ -125,43 +172,79 @@
             }
         }
 
-        /* Theme Toggle */
+        /* Theme Toggle - Neural Orb */
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: var(--card-bg);
-            border: none;
+            background: rgba(15, 15, 35, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--card-shadow);
+            box-shadow:
+                0 0 20px rgba(0, 212, 255, 0.2),
+                inset 0 0 10px rgba(0, 212, 255, 0.1);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle i {
+            color: var(--neural-primary);
+            font-size: 1.1rem;
             transition: var(--transition);
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(10deg);
+            box-shadow:
+                0 0 15px rgba(0, 212, 255, 0.2),
+                inset 0 0 8px rgba(0, 212, 255, 0.1);
+            border-color: var(--neural-primary);
         }
 
-        /* Navigation */
+        .theme-toggle:hover i {
+            text-shadow: 0 0 8px var(--neural-primary);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(8, 145, 178, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .theme-toggle i {
+            color: #6d28d9;
+        }
+
+        /* Navigation - Terminal Style */
         .nav {
-            background: var(--card-bg);
-            padding: 1rem;
-            box-shadow: var(--card-shadow);
+            background: rgba(10, 10, 26, 0.95);
+            padding: 1rem 2rem;
+            box-shadow:
+                0 4px 30px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(0, 212, 255, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
         }
 
-        [data-theme="dark"] .nav {
-            background: rgba(31, 41, 55, 0.8);
+        [data-theme="light"] .nav {
+            background: rgba(240, 249, 255, 0.95);
+            border-bottom-color: rgba(8, 145, 178, 0.2);
+        }
+
+        [data-theme="light"] .header-content {
+            background: var(--bg-color);
         }
 
         .nav ul {
@@ -171,23 +254,57 @@
             gap: 2rem;
         }
 
+        .nav li {
+            position: relative;
+        }
+
         .nav a {
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
             transition: var(--transition);
             position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav a:hover {
+            color: var(--neural-primary);
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--neural-primary);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.4);
+        }
+
+        .nav a:hover::before {
+            opacity: 1;
         }
 
         .nav a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: var(--accent-color);
+            background: linear-gradient(90deg, var(--neural-primary), var(--neural-accent));
             transition: var(--transition);
+            border-radius: 1px;
         }
 
         .nav a:hover::after {
@@ -210,8 +327,12 @@
         }
 
         .section h2 {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--gold-color), var(--primary-color));
-            background-size: 200% auto;
+            background: linear-gradient(90deg,
+                var(--neural-primary),
+                var(--neural-secondary),
+                var(--neural-accent),
+                var(--neural-primary));
+            background-size: 300% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -220,10 +341,27 @@
             position: relative;
             display: inline-block;
             transition: var(--transition);
+            animation: textShine 8s linear infinite;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
         .section h2:hover {
-            animation: shimmer 3s linear infinite;
+            animation: textShine 2s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.25));
+        }
+
+        .section h2::before {
+            content: '//';
+            position: absolute;
+            left: -35px;
+            color: var(--neural-secondary);
+            opacity: 0.5;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 1.5rem;
         }
 
         .section h2::after {
@@ -231,47 +369,115 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 50px;
+            width: 60px;
             height: 3px;
-            background: var(--gold-color);
+            background: linear-gradient(90deg, var(--neural-primary), var(--neural-accent));
             border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        /* Experience Cards */
+        /* Experience Cards - Dark Glassmorphism */
         .experience-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: rgba(15, 15, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: var(--card-shadow);
+            box-shadow:
+                0 4px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: var(--transition);
-            border: 2px solid transparent;
-            border-left: 4px solid var(--secondary-color);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--neural-primary), var(--neural-secondary));
+            border-radius: 4px 0 0 4px;
         }
 
         .experience-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-left-color: var(--gold-color);
-            border-top: 2px solid var(--gold-color);
-            border-right: 2px solid var(--gold-color);
-            border-bottom: 2px solid var(--gold-color);
+            transform: translateY(-4px);
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 212, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.25);
+        }
+
+        .experience-card:hover::before {
+            background: linear-gradient(180deg, var(--neural-accent), var(--neural-primary));
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
         }
 
         .experience-card h3 {
-            color: var(--primary-color);
+            color: var(--neural-primary);
             margin-bottom: 0.5rem;
             font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .experience-card:hover h3 {
+            text-shadow: 0 0 5px rgba(0, 212, 255, 0.25);
         }
 
         .experience-card .date {
-            color: var(--accent-color);
+            color: var(--neural-secondary);
             font-size: 0.9rem;
             margin-bottom: 1rem;
             font-weight: 500;
+            font-family: 'SF Mono', 'Fira Code', monospace;
         }
 
-        /* Skills Grid */
+        .experience-card ul {
+            list-style: none;
+        }
+
+        .experience-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-card li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--neural-accent);
+            font-family: monospace;
+        }
+
+        /* Light theme adjustments for cards */
+        [data-theme="light"] .experience-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(8, 145, 178, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .experience-card::before {
+            background: linear-gradient(180deg, #0891b2, #6d28d9);
+        }
+
+        [data-theme="light"] .experience-card h3 {
+            color: #0891b2;
+        }
+
+        [data-theme="light"] .experience-card .date {
+            color: #6d28d9;
+        }
+
+        [data-theme="light"] .experience-card li::before {
+            color: #059669;
+        }
+
+        /* Skills Grid - Neural Layers */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -279,53 +485,107 @@
         }
 
         .skill-category {
-            background: var(--card-bg);
+            background: rgba(15, 15, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
+            border-radius: 16px;
+            box-shadow:
+                0 4px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: var(--transition);
-            border: 2px solid transparent;
-            border-left: 4px solid var(--secondary-color);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neural-primary), var(--neural-secondary), var(--neural-accent));
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            border-left-color: var(--gold-color);
-            border-top: 2px solid var(--gold-color);
-            border-right: 2px solid var(--gold-color);
-            border-bottom: 2px solid var(--gold-color);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 212, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.3);
         }
 
         .skill-category h3 {
-            color: var(--primary-color);
+            color: var(--neural-primary);
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .skill-category h3 i {
+            color: var(--neural-accent);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
         }
 
         .skill-category ul {
             list-style: none;
-        }
-
-        .skill-category li {
-            margin-bottom: 0.8rem;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 0.5rem;
         }
 
-        .skill-category li::before {
-            content: '▹';
-            color: var(--primary-color);
+        .skill-category li {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            cursor: default;
         }
 
-        /* Contact Links */
+        .skill-category li:hover {
+            background: rgba(0, 212, 255, 0.15);
+            border-color: var(--neural-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 212, 255, 0.15);
+        }
+
+        .skill-category li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: var(--neural-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 3px var(--neural-accent);
+        }
+
+        /* Light theme skills */
+        [data-theme="light"] .skill-category {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="light"] .skill-category li {
+            background: rgba(8, 145, 178, 0.1);
+            border-color: rgba(8, 145, 178, 0.2);
+        }
+
+        [data-theme="light"] .skill-category li::before {
+            background: #059669;
+        }
+
+        /* Contact Links - Neural Buttons */
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
             animation: fadeInUp 1s ease 0.4s;
             animation-fill-mode: both;
@@ -334,48 +594,151 @@
         .contact-links a {
             color: white;
             text-decoration: none;
-            opacity: 0.9;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-links a:hover::before {
+            left: 100%;
         }
 
         .contact-links a:hover {
-            opacity: 1;
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--neural-primary);
+            box-shadow:
+                0 0 10px rgba(0, 212, 255, 0.2),
+                0 8px 20px rgba(0, 0, 0, 0.2);
         }
+
+        .contact-links a i {
+            color: var(--neural-accent);
+        }
+
+        /* Staggered Card Animations */
+        .experience-card,
+        .skill-category {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section.visible .experience-card,
+        .section.visible .skill-category {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section.visible .experience-card:nth-child(1) { transition-delay: 0.1s; }
+        .section.visible .experience-card:nth-child(2) { transition-delay: 0.2s; }
+        .section.visible .experience-card:nth-child(3) { transition-delay: 0.3s; }
+        .section.visible .experience-card:nth-child(4) { transition-delay: 0.4s; }
+        .section.visible .experience-card:nth-child(5) { transition-delay: 0.5s; }
+        .section.visible .experience-card:nth-child(6) { transition-delay: 0.6s; }
+        .section.visible .experience-card:nth-child(7) { transition-delay: 0.7s; }
+        .section.visible .experience-card:nth-child(8) { transition-delay: 0.8s; }
+
+        .section.visible .skill-category:nth-child(1) { transition-delay: 0.1s; }
+        .section.visible .skill-category:nth-child(2) { transition-delay: 0.15s; }
+        .section.visible .skill-category:nth-child(3) { transition-delay: 0.2s; }
+        .section.visible .skill-category:nth-child(4) { transition-delay: 0.25s; }
+        .section.visible .skill-category:nth-child(5) { transition-delay: 0.3s; }
+        .section.visible .skill-category:nth-child(6) { transition-delay: 0.35s; }
+        .section.visible .skill-category:nth-child(7) { transition-delay: 0.4s; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav ul {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
+                gap: 0.75rem;
+            }
+
+            .nav a::before {
+                display: none;
             }
 
             .header {
-                padding: 4rem 1rem;
+                min-height: 350px;
+            }
+
+            .header-content {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
             }
 
             .header h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
             }
 
             .contact-links {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .section h2::before {
+                display: none;
+            }
+
+            .experience-card,
+            .skill-category {
+                padding: 1.5rem;
+            }
+
+            .skill-category li {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            #neural-canvas,
+            #bg-canvas {
+                display: none;
             }
         }
 
         /* Add styles for organization links */
         .org-link {
-            color: inherit;
+            color: var(--neural-primary);
             text-decoration: none;
             position: relative;
             transition: var(--transition);
@@ -388,12 +751,12 @@
             left: 0;
             width: 0;
             height: 1px;
-            background: var(--accent-color);
+            background: linear-gradient(90deg, var(--neural-primary), var(--neural-accent));
             transition: var(--transition);
         }
 
         .org-link:hover {
-            color: var(--accent-color);
+            color: var(--neural-accent);
         }
 
         .org-link:hover::after {
@@ -411,18 +774,22 @@
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
+    <canvas id="bg-canvas"></canvas>
     <button class="theme-toggle" id="theme-toggle">
         <i class="fas fa-sun"></i>
     </button>
 
     <header class="header">
-        <h1>Matthew Ohanian</h1>
-        <p>Data Science, Machine Learning, Agentic AI</p>
-        <div class="contact-links">
-            <a href="mailto:matt.ohan@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-            <a href="https://linkedin.com/in/matthewohanian"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/mattohan567"><i class="fab fa-github"></i> GitHub</a>
+        <canvas id="neural-canvas"></canvas>
+        <div class="header-content">
+            <h1>Matthew Ohanian</h1>
+            <p>Data Science, Machine Learning, Agentic AI</p>
+            <div class="contact-links">
+                <a href="mailto:matt.ohan@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://linkedin.com/in/matthewohanian"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/mattohan567"><i class="fab fa-github"></i> GitHub</a>
+            </div>
         </div>
     </header>
 
@@ -644,7 +1011,7 @@
         <div class="experience-card">
             <h3><i class="fas fa-hands-helping"></i> Community Service</h3>
             <ul>
-                <li><i class="fas fa-broom"></i> Lower Nob Hill Weekly Cleanup, San Francisco, CA (January 2024-Present): Participate in weekly Sunday community cleanup events to maintain and beautify the neighborhood. <a href="https://www.mobilize.us/togethersf/event/409574/" target="_blank">Event Link</a></li>
+                <li><i class="fas fa-broom"></i> Lower Nob Hill Weekly Cleanup, San Francisco, CA (January 2024-July 2025): Participated in weekly Sunday community cleanup events to maintain and beautify the neighborhood. <a href="https://www.mobilize.us/togethersf/event/409574/" target="_blank">Event Link</a></li>
                 <li>Project Paper Bag, Los Angeles, CA (2019-2023): Prepared and delivered meals for the homeless</li>
                 <li>Olive Crest, Riverside, CA (2021-2022): Assisted in organizing fundraisers to support children in foster care</li>
                 <li>ACEing Autism, Burbank, CA (2017-2018): Helped teach children with autism how to play tennis</li>
@@ -732,21 +1099,322 @@
     </section>
 
     <script>
+        // ========================================
+        // Neural Network Training Animation
+        // Shows forward prop and backprop
+        // ========================================
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Network structure (realistic: input features → wider hidden → narrower → output classes)
+        const layerSizes = [4, 6, 8, 6, 3]; // Input(4) → Hidden(6) → Hidden(8) → Hidden(6) → Output(3)
+        let nodes = [];
+        let connections = [];
+
+        // Animation state
+        let animationPhase = 'forward'; // 'forward', 'output', 'backward', 'pause'
+        let activeLayer = 0;
+        let phaseProgress = 0;
+        let lastTime = 0;
+
+        // Timing (in ms)
+        const timing = {
+            forward: 600,      // Time per layer during forward prop
+            output: 400,       // Output flash duration
+            backward: 600,     // Time per layer during backprop
+            pause: 800         // Pause before restart
+        };
+
+        // Colors
+        const colors = {
+            nodeInactive: 'rgba(0, 212, 255, 0.15)',
+            nodeStroke: 'rgba(0, 212, 255, 0.4)',
+            forwardActive: '#00d4ff',      // Cyan for forward
+            backwardActive: '#7c3aed',     // Violet for backward
+            connectionInactive: 'rgba(0, 212, 255, 0.08)',
+            pulseForward: '#00d4ff',
+            pulseBackward: '#7c3aed'
+        };
+
+        // Pulses traveling along connections
+        let pulses = [];
+
+        // Resize canvas
+        function resizeCanvas() {
+            const header = document.querySelector('.header');
+            canvas.width = header.offsetWidth;
+            canvas.height = header.offsetHeight;
+        }
+
+        // Initialize network structure
+        function initNetwork() {
+            nodes = [];
+            connections = [];
+
+            const paddingX = 120;
+            const paddingY = 0; // Less vertical padding = more stretch
+            const layerSpacing = (canvas.width - paddingX * 2) / (layerSizes.length - 1);
+
+            // Create nodes for each layer
+            layerSizes.forEach((size, layerIndex) => {
+                const x = paddingX + layerIndex * layerSpacing;
+                const nodeSpacing = (canvas.height - paddingY * 2) / (size + 1);
+
+                for (let i = 0; i < size; i++) {
+                    const y = paddingY + (i + 1) * nodeSpacing;
+                    nodes.push({
+                        x,
+                        y,
+                        layer: layerIndex,
+                        index: i,
+                        activation: 0 // 0 = inactive, 1 = fully active
+                    });
+                }
+            });
+
+            // Create connections between adjacent layers
+            for (let l = 0; l < layerSizes.length - 1; l++) {
+                const currentLayerNodes = nodes.filter(n => n.layer === l);
+                const nextLayerNodes = nodes.filter(n => n.layer === l + 1);
+
+                currentLayerNodes.forEach(fromNode => {
+                    nextLayerNodes.forEach(toNode => {
+                        connections.push({
+                            from: fromNode,
+                            to: toNode,
+                            activation: 0
+                        });
+                    });
+                });
+            }
+        }
+
+        // Create pulses for a layer transition
+        let lastTriggeredLayer = -1;
+
+        function createPulsesForLayer(fromLayer, toLayer, isBackward) {
+            const fromNodes = nodes.filter(n => n.layer === fromLayer);
+            const toNodes = nodes.filter(n => n.layer === toLayer);
+
+            fromNodes.forEach(from => {
+                toNodes.forEach(to => {
+                    pulses.push({
+                        fromX: from.x,
+                        fromY: from.y,
+                        toX: to.x,
+                        toY: to.y,
+                        progress: 0,
+                        speed: 0.003 + Math.random() * 0.001,
+                        isBackward: isBackward
+                    });
+                });
+            });
+        }
+
+        // Update animation state
+        function update(deltaTime) {
+            phaseProgress += deltaTime;
+
+            // Update existing pulses
+            pulses = pulses.filter(pulse => {
+                pulse.progress += pulse.speed * deltaTime;
+                return pulse.progress < 1;
+            });
+
+            if (animationPhase === 'forward') {
+                const layerTime = timing.forward;
+                const totalLayers = layerSizes.length;
+                const currentLayer = Math.floor(phaseProgress / layerTime);
+
+                // Trigger pulses when entering a new layer
+                if (currentLayer > lastTriggeredLayer && currentLayer < totalLayers) {
+                    if (currentLayer > 0) {
+                        createPulsesForLayer(currentLayer - 1, currentLayer, false);
+                    }
+                    lastTriggeredLayer = currentLayer;
+                }
+
+                // Update node activations - only current layer is lit
+                nodes.forEach(node => {
+                    if (node.layer === currentLayer) {
+                        node.activation = Math.min(1, node.activation + deltaTime / 100);
+                    } else {
+                        node.activation = Math.max(0, node.activation - deltaTime / 150);
+                    }
+                });
+
+                if (phaseProgress >= layerTime * totalLayers) {
+                    animationPhase = 'output';
+                    phaseProgress = 0;
+                    lastTriggeredLayer = -1;
+                }
+
+            } else if (animationPhase === 'output') {
+                if (phaseProgress >= timing.output) {
+                    animationPhase = 'backward';
+                    phaseProgress = 0;
+                    nodes.forEach(n => n.activation = 0);
+                    lastTriggeredLayer = layerSizes.length;
+                }
+
+            } else if (animationPhase === 'backward') {
+                const layerTime = timing.backward;
+                const totalLayers = layerSizes.length;
+                const currentLayer = totalLayers - 1 - Math.floor(phaseProgress / layerTime);
+
+                // Trigger pulses when entering a new layer (going backward)
+                if (currentLayer < lastTriggeredLayer && currentLayer >= 0) {
+                    if (currentLayer < totalLayers - 1) {
+                        createPulsesForLayer(currentLayer + 1, currentLayer, true);
+                    }
+                    lastTriggeredLayer = currentLayer;
+                }
+
+                nodes.forEach(node => {
+                    if (node.layer === currentLayer) {
+                        node.activation = Math.min(1, node.activation + deltaTime / 100);
+                    } else {
+                        node.activation = Math.max(0, node.activation - deltaTime / 150);
+                    }
+                });
+
+                if (phaseProgress >= layerTime * totalLayers) {
+                    animationPhase = 'pause';
+                    phaseProgress = 0;
+                    lastTriggeredLayer = -1;
+                }
+
+            } else if (animationPhase === 'pause') {
+                nodes.forEach(n => {
+                    n.activation = Math.max(0, n.activation - deltaTime / 300);
+                });
+
+                if (phaseProgress >= timing.pause) {
+                    animationPhase = 'forward';
+                    phaseProgress = 0;
+                    activeLayer = 0;
+                    pulses = [];
+                }
+            }
+        }
+
+        // Draw the network
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const isBackward = animationPhase === 'backward';
+            const activeColor = isBackward ? colors.backwardActive : colors.forwardActive;
+
+            // Draw static connections (dim)
+            connections.forEach(conn => {
+                ctx.beginPath();
+                ctx.moveTo(conn.from.x, conn.from.y);
+                ctx.lineTo(conn.to.x, conn.to.y);
+                ctx.strokeStyle = colors.connectionInactive;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            });
+
+            // Draw traveling pulses
+            pulses.forEach(pulse => {
+                const x = pulse.fromX + (pulse.toX - pulse.fromX) * pulse.progress;
+                const y = pulse.fromY + (pulse.toY - pulse.fromY) * pulse.progress;
+
+                // Pulse glow
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                const glowColor = pulse.isBackward ? 'rgba(124, 58, 237, 0.3)' : 'rgba(0, 212, 255, 0.3)';
+                ctx.fillStyle = glowColor;
+                ctx.fill();
+
+                // Pulse dot
+                ctx.beginPath();
+                ctx.arc(x, y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = pulse.isBackward ? colors.pulseBackward : colors.pulseForward;
+                ctx.fill();
+            });
+
+            // Draw nodes
+            nodes.forEach(node => {
+                const radius = 6;
+
+                // Glow for active nodes
+                if (node.activation > 0.1) {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, radius + 6 * node.activation, 0, Math.PI * 2);
+                    const glowColor = isBackward
+                        ? `rgba(124, 58, 237, ${node.activation * 0.2})`
+                        : `rgba(0, 212, 255, ${node.activation * 0.2})`;
+                    ctx.fillStyle = glowColor;
+                    ctx.fill();
+                }
+
+                // Node fill
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+
+                if (node.activation > 0.1) {
+                    ctx.fillStyle = isBackward
+                        ? `rgba(124, 58, 237, ${0.3 + node.activation * 0.7})`
+                        : `rgba(0, 212, 255, ${0.3 + node.activation * 0.7})`;
+                } else {
+                    ctx.fillStyle = colors.nodeInactive;
+                }
+                ctx.fill();
+
+                // Node stroke
+                ctx.strokeStyle = node.activation > 0.1
+                    ? activeColor
+                    : colors.nodeStroke;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            });
+        }
+
+        // Animation loop
+        function animate(currentTime) {
+            const deltaTime = lastTime ? currentTime - lastTime : 16;
+            lastTime = currentTime;
+
+            update(deltaTime);
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initNetwork();
+        });
+        resizeCanvas();
+        initNetwork();
+        requestAnimationFrame(animate);
+
+        // ========================================
         // Theme toggle functionality
+        // ========================================
         const themeToggle = document.getElementById('theme-toggle');
-        const icon = themeToggle.querySelector('i');
-        
+        const themeIcon = themeToggle.querySelector('i');
+
         // Initialize icon to match the default dark theme
-        icon.className = 'fas fa-sun';
-        
+        themeIcon.className = 'fas fa-sun';
+
         themeToggle.addEventListener('click', () => {
-            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-            icon.className = document.body.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            const isLight = document.body.dataset.theme === 'light';
+            if (isLight) {
+                delete document.body.dataset.theme;
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                document.body.dataset.theme = 'light';
+                themeIcon.className = 'fas fa-moon';
+            }
         });
 
-        // Intersection Observer for fade-in animations
+        // ========================================
+        // Intersection Observer for fade-in
+        // ========================================
         const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -754,7 +1422,168 @@
             });
         }, { threshold: 0.1 });
 
-        sections.forEach(section => observer.observe(section));
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // ========================================
+        // Background Particle Animation
+        // Similar to particles.js with mouse interaction
+        // ========================================
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+
+        let particles = [];
+        const particleCount = 100;
+        const connectionDistance = 150;
+        const mouseRadius = 150;
+        let mouse = { x: null, y: null };
+
+        function resizeBgCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+
+        // Purple and blue color palette
+        const galaxyColors = [
+            { r: 0, g: 212, b: 255 },    // Cyan
+            { r: 0, g: 153, b: 255 },    // Blue
+            { r: 59, g: 130, b: 246 },   // Sky blue
+            { r: 99, g: 102, b: 241 },   // Indigo
+            { r: 124, g: 58, b: 237 },   // Purple
+            { r: 139, g: 92, b: 246 },   // Violet
+            { r: 168, g: 85, b: 247 },   // Light purple
+        ];
+
+        function createParticle(x, y) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 0.3 + 0.1;
+            const color = galaxyColors[Math.floor(Math.random() * galaxyColors.length)];
+            return {
+                x: x !== undefined ? x : Math.random() * bgCanvas.width,
+                y: y !== undefined ? y : Math.random() * bgCanvas.height,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                radius: Math.random() * 2 + 1,
+                color: color
+            };
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(createParticle());
+            }
+        }
+
+        function drawBgAnimation() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+            const isLight = document.body.dataset.theme === 'light';
+
+            // Update positions
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Wrap around edges
+                if (p.x < 0) p.x = bgCanvas.width;
+                if (p.x > bgCanvas.width) p.x = 0;
+                if (p.y < 0) p.y = bgCanvas.height;
+                if (p.y > bgCanvas.height) p.y = 0;
+            });
+
+            // Draw connections between particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const opacity = (1 - dist / connectionDistance) * 0.3;
+                        // Blend colors of both particles
+                        const c1 = particles[i].color;
+                        const c2 = particles[j].color;
+                        const r = Math.round((c1.r + c2.r) / 2);
+                        const g = Math.round((c1.g + c2.g) / 2);
+                        const b = Math.round((c1.b + c2.b) / 2);
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(particles[i].x, particles[i].y);
+                        bgCtx.lineTo(particles[j].x, particles[j].y);
+                        bgCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        bgCtx.lineWidth = 1;
+                        bgCtx.stroke();
+                    }
+                }
+            }
+
+            // Draw connections to mouse (grab effect)
+            if (mouse.x !== null && mouse.y !== null) {
+                particles.forEach(p => {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < mouseRadius) {
+                        const opacity = (1 - dist / mouseRadius) * 0.5;
+                        const c = p.color;
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(p.x, p.y);
+                        bgCtx.lineTo(mouse.x, mouse.y);
+                        bgCtx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${opacity})`;
+                        bgCtx.lineWidth = 1;
+                        bgCtx.stroke();
+                    }
+                });
+            }
+
+            // Draw particles with glow
+            particles.forEach(p => {
+                const c = p.color;
+                // Outer glow
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.radius * 2, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.15)`;
+                bgCtx.fill();
+                // Core
+                bgCtx.beginPath();
+                bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, 0.7)`;
+                bgCtx.fill();
+            });
+
+            requestAnimationFrame(drawBgAnimation);
+        }
+
+        // Mouse events
+        bgCanvas.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        bgCanvas.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        bgCanvas.addEventListener('click', (e) => {
+            // Push 4 new particles on click
+            for (let i = 0; i < 4; i++) {
+                particles.push(createParticle(e.clientX, e.clientY));
+            }
+            // Remove oldest particles to keep count stable
+            while (particles.length > particleCount + 20) {
+                particles.shift();
+            }
+        });
+
+        // Initialize
+        resizeBgCanvas();
+        initParticles();
+        drawBgAnimation();
+
+        window.addEventListener('resize', () => {
+            resizeBgCanvas();
+        });
     </script>
 </body>
 </html> 
